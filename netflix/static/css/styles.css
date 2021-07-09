@@ -24,4 +24,35 @@
   color: white;
 
 }
-
+.display_movies{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.footer{
+  height: 30vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.footer>img{
+  width: 100px;
+  margin:0;
+}
+.footer>img:first-child:hover{
+  background-color: blue;
+}
+.footer>img:nth-child(2):hover{
+  background-color: rgb(29,156,234);
+}
+.footer>img:nth-child(3):hover{
+  background-color: rgb(188,93,179);
+}
+.footer>img:nth-child(4):hover{
+  background-color: rgb(234,76,137);
+}
+.footer>img:nth-child(5):hover{
+  background-color: rgb(5,62,255);
+}
