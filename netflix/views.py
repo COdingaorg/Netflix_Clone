@@ -68,7 +68,7 @@ def login_user(request):
   context = {
     'title':title
   }
-  return render(request, 'register_login.html', context)
+  return render(request, 'login.html', context)
 
 
 def logout_user(request):

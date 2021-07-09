@@ -45,20 +45,20 @@
       </form>
     </div>
     <div class="form-container sign-in-container">
-      <form action="#", method="POST">
+      <form action="{% url 'login'  %}" method="POST">
         {%csrf_token%}
         {{forms.errors}}
-        <h1>Sign in</h1>
+        <h3 class="text-center">Already have an Account?</h3>
+        
         <div class="social-container">
+          <p>Sign in using Social Accounts</p>
           <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
           <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
           <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <span>or use your account</span>
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+        <p>or use your account</p>
+        <button>Sign In Now</button>
         <a href="#">Forgot your password?</a>
-        <button>Sign In</button>
       </form>
     </div>
     <div class="overlay-container">
