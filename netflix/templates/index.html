@@ -8,15 +8,28 @@
 <div class="banner">
   <div class="banner_content"> 
     <h1>Welcome to Movie Slack</h1>
-    <form class="form-inline my-2 my-lg-0" role='search' action="{% url 'search_movies' %}">
-      
+    <form class="form-inline my-2 my-lg-0" method="GET" role='search' action="{% url 'search_movies' %}">
+
     <input class="form-control mr-sm-2" type="search" name='search_movie' placeholder="Search Movie" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
 </div>
  
 </div>
+<h2>Popular Movies</h2>
+<div class="row">
+{% for result in results%}
 
+<div class="card col-md-2" style="width: 18rem;">
+  <img class="card-img-top" src="https://www.themoviedb.org/t/p/w220_and_h330_face{{result.poster_path}}" alt="Card image cap">
+  <a href="#" class="btn btn-success" >{{result.vote_average}}<sup>%</sup></a>
+  <div class="card-body">
+    <h5 class="card-title">{{result.original_title}}</h5>
+    <p class="card-text">{{result.overview}}</p>
+  </div>
+  <div class="card-footer">{{result.release_date}}</div>
+</div>
 
-
+{%endfor%}
+</div>  
 {%endblock%}
