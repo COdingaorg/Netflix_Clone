@@ -14,7 +14,7 @@ def index(request):
   results_returned = movie_results.json()
   results_returned['success'] = True
   context = {
-      'results':results_returned['results'],
+      'results':results_returned['results'][0:12],
       'title':title
     }
 

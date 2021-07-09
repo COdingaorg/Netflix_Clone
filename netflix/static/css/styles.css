@@ -9,10 +9,11 @@
   background-position: center;
   background-position-x: center;
   margin-top: -3vh;
+  width: 99vw;
 }
 .banner_content{
   background-color: rgba(0, 0, 0, 0.4);
-  width: 100%;
+  width: 98vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -24,4 +25,3 @@
 
 }
 
-/*styling register and login form*/
