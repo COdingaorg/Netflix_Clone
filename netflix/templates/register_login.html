@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<h1 class="text-center">Movie Slack</h1>
+  <h1 class="text-center">Movie Slack</h1>
   {% block content %}
   <div class="container" id="container">
     <div class="form-container sign-up-container">
@@ -49,8 +49,11 @@
       <form action="{% url 'register'  %}" method="POST">
         {%csrf_token%}
         {{forms.errors}}
+        {% for message in messages%}
+        <p class="alert-info text-center">{{message}}</p>
+        {%endfor%}
         <h3 class="text-center">Already have an Account?</h3>
-        
+
         <div class="social-container">
           <p>Sign in using Social Accounts</p>
           <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -58,7 +61,7 @@
           <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <p>or use your account</p>
-        <a href="{% url 'login'%}"><button>Sign In Now</button></a> 
+        <a href="{% url 'login'%}"><button>Sign In Now</button></a>
       </form>
     </div>
     <div class="overlay-container">
