@@ -49,47 +49,48 @@ def register_user(request):
   '''
   form = registerUserForm
   title = 'Register - Movie Slack'
+  if request.user.is_authenticated:
+    return redirect('home')
+  else:
+    if request.method == 'POST':
+      form = registerUserForm(request.POST)
+      if form.is_valid(): 
+        form.save()
+        messages.success(request, 'Account Created Successfully')
+        return redirect('login')
 
-  if request.method == 'POST':
-    form = registerUserForm(request.POST)
-    if form.is_valid(): 
-      form.save()
-      messages.success(request, 'Account Created Successfully')
-      return redirect('login')
+    context = {
+      'title':title,
+      'form':form,
+    }
 
-  context = {
-    'title':title,
-    'form':form,
-  }
-
-  return render(request, 'register_login.html', context)
+    return render(request, 'register_login.html', context)
 
 def login_user(request):
   '''
   Logs in a registered user to the application, redirects to homepage
   '''
   title = 'Login-Movie Slack'
+  if request.user.is_authenticated:
+    return redirect('home')
+  else:
+    if request.method == 'POST':
+      username = request.POST.get('username')
+      password = request.POST.get('password')
+      user = authenticate(request, username = username, password = password)
 
-  if request.method == 'POST':
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    user = authenticate(request, username = username, password = password)
+      if user is not None:
+        login(request, user)
 
-    if user is not None:
-      login(request, user)
+        return redirect('home')
 
-      return redirect('home')
-
-    else:
-      messages(request, 'Username or password is Incorrect')
-
-    
-
-
-  context = {
-    'title':title
-  }
-  return render(request, 'login.html', context)
+      else:
+        messages(request, 'Username or password is Incorrect')
+  
+    context = {
+      'title':title
+    }
+    return render(request, 'login.html', context)
 
 @login_required(login_url='login')
 def logout_user(request):
