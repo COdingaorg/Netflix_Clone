@@ -83,8 +83,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'netflix_clone',
-        'USER':config('moringa'),
-        'USER_PASSWORD':config('access'),
+        'USER':config('USER'),
+        'USER_PASSWORD':config('USER_PASSWORD'),
     }
 }
 
