@@ -46,7 +46,10 @@ def register_user(request):
   form = registerUserForm
   title = 'Register - Movie Slack'
 
-
+  if request.method == 'POST':
+    form = registerUserForm(request.POST)
+    if form.is_valid(): 
+      form.save()
 
   context = {
     'title':title,
