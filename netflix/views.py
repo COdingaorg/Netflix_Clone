@@ -71,9 +71,9 @@ def login_user(request):
   title = 'Login-Movie Slack'
 
   if request.method == 'POST':
-    email = request.POST.get('email')
+    username = request.POST.get('username')
     password = request.POST.get('password')
-    user = authenticate(request, username = email, password = password)
+    user = authenticate(request, username = username, password = password)
 
     if user is not None:
       login(request, user)
@@ -81,7 +81,7 @@ def login_user(request):
       return redirect('home')
 
     else:
-      messages(request, 'Email or password is Incorrect')
+      messages(request, 'Username or password is Incorrect')
 
     
 
@@ -96,8 +96,9 @@ def logout_user(request):
   '''
   Logs out a logged in user out of the apllication, redirects to login page
   '''
+  user = request.user
   title = 'Logout - Movie Slack'
-  logout()
+  logout(request, user)
   context = {
     'title':title
   }
