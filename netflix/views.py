@@ -4,8 +4,10 @@ import requests
 from django.contrib.auth import authenticate, logout, login
 from .forms import registerUserForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='login')
 def index(request):
   title = 'Netflix clone Homepage'
   url = (settings.API_LINK).format(type = 'movie', search_term = 'popular', api_key = settings.API_KEY)
@@ -23,6 +25,7 @@ def index(request):
 
   return render(request, 'index.html', context)
 
+@login_required(login_url='login')
 def search_movies(request):
   
   if 'search_movie' in request.GET and request.GET['search_movie']:
@@ -88,7 +91,7 @@ def login_user(request):
   }
   return render(request, 'login.html', context)
 
-
+@login_required(login_url='login')
 def logout_user(request):
   '''
   Logs out a logged in user out of the apllication, redirects to login page
