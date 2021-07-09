@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'netflix_clone.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.posgresql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'netflix_clone',
         'USER':config('moringa'),
         'USER_PASSWORD':config('access'),
