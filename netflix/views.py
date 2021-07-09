@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
 import requests
+from django.contrib.auth import authenticate, logout
 
 # Create your views here.
 def index(request):
@@ -36,3 +37,20 @@ def search_movies(request):
     }
 
     return render(request, 'search_results.html',context)
+
+def login_user(request):
+  title = 'Login-Movie Slack'
+
+
+  context = {
+    'title':title
+  }
+  return render(request, 'register_login.html', context)
+
+
+def logout_user(request):
+  title = 'Logout - Movie Slack'
+  logout()
+  context = {
+    'title':title
+  }

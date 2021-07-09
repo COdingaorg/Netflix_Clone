@@ -19,7 +19,7 @@ from django.urls.conf import include
 
 urlpatterns = [
     path(r'admin/', admin.site.urls),
-    path(r'home/', include('netflix.urls')),
+    path(r'', include('netflix.urls')),
     path(r'', include('django_registration.backends.activation.urls')),
     path(r'', include('django.contrib.auth.urls')),
 ]
