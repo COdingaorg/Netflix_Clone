@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.conf import settings
 import requests
 from django.contrib.auth import authenticate, logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -38,7 +39,23 @@ def search_movies(request):
 
     return render(request, 'search_results.html',context)
 
+def register_user(request):
+  '''
+  Registers a user using to application, redirects to homepage
+  '''
+  title = 'Register - Movie Slack'
+
+
+  context = {
+    'title':title
+  }
+
+  return render(request, 'register_login.html', context)
+
 def login_user(request):
+  '''
+  Logs in a registered user to the application, redirects to homepage
+  '''
   title = 'Login-Movie Slack'
 
 
@@ -49,6 +66,9 @@ def login_user(request):
 
 
 def logout_user(request):
+  '''
+  Logs out a logged in user out of the apllication, redirects to login page
+  '''
   title = 'Logout - Movie Slack'
   logout()
   context = {
