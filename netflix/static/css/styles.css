@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
+}
 .banner{
   background-image: url('../images/moviebanner2.jpg');
   background-position: center;
@@ -17,3 +23,5 @@
   color: white;
 
 }
+
+/*styling register and login form*/
