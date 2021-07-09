@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.conf import settings
 import requests
 from django.contrib.auth import authenticate, logout
-from django.contrib.auth.models import User
+from .forms import registerUserForm
 
 # Create your views here.
 def index(request):
@@ -43,11 +43,14 @@ def register_user(request):
   '''
   Registers a user using to application, redirects to homepage
   '''
+  form = registerUserForm
   title = 'Register - Movie Slack'
 
 
+
   context = {
-    'title':title
+    'title':title,
+    'form':form,
   }
 
   return render(request, 'register_login.html', context)

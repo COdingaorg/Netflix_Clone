@@ -85,14 +85,14 @@ input {
 	border: none;
 	padding: 12px 15px;
 	margin: 8px 0;
-	width: 100%;
+	width: 60%;
+	height: 10px;
 }
 
 .container {
 	background-color: #fff;
 	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-			0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
 	width: 768px;
@@ -122,8 +122,19 @@ input {
 	width: 50%;
 	opacity: 0;
 	z-index: 1;
+	overflow: visible;
 }
+.sign-up-container>form{
+	height: 100%;
+	font-size: .6em;
+}
+.former{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
 
+}
 .container.right-panel-active .sign-up-container {
 	transform: translateX(100%);
 	opacity: 1;
