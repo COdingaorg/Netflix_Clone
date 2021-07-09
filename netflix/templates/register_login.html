@@ -27,6 +27,7 @@
     <div class="form-container sign-up-container">
       <form action="#" method="POST">
         {%csrf_token%}
+        {{forms.errors}}
         <h2>Create Account</h2>
         <div class="social-container">
           <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -45,7 +46,7 @@
       </form>
     </div>
     <div class="form-container sign-in-container">
-      <form action="{% url 'login'  %}" method="POST">
+      <form action="{% url 'register'  %}" method="POST">
         {%csrf_token%}
         {{forms.errors}}
         <h3 class="text-center">Already have an Account?</h3>
@@ -57,8 +58,7 @@
           <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <p>or use your account</p>
-        <button>Sign In Now</button>
-        <a href="#">Forgot your password?</a>
+        <a href="{% url 'login'%}"><button>Sign In Now</button></a> 
       </form>
     </div>
     <div class="overlay-container">

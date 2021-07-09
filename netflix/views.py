@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.conf import settings
 import requests
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate, logout, login
 from .forms import registerUserForm
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -50,6 +51,8 @@ def register_user(request):
     form = registerUserForm(request.POST)
     if form.is_valid(): 
       form.save()
+      messages.success(request, 'Account Created Successfully')
+      return redirect('login')
 
   context = {
     'title':title,
@@ -63,6 +66,9 @@ def login_user(request):
   Logs in a registered user to the application, redirects to homepage
   '''
   title = 'Login-Movie Slack'
+
+  if request.GET:
+    form
 
 
   context = {
