@@ -96,9 +96,6 @@ def logout_user(request):
   '''
   Logs out a logged in user out of the apllication, redirects to login page
   '''
-  user = request.user
-  title = 'Logout - Movie Slack'
-  logout(request, user)
-  context = {
-    'title':title
-  }
+  logout(request)
+  
+  return redirect('login')

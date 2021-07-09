@@ -30,6 +30,9 @@
   align-items: center;
   justify-content: center;
 }
+.navform{
+  margin-top: 20px;
+}
 .footer{
   height: 30vh;
   display: flex;
