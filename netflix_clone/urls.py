@@ -23,4 +23,5 @@ urlpatterns = [
     path(r'', include('django_registration.backends.activation.urls')),
     path(r'', include('django.contrib.auth.urls')),
     # url(r'', include('movies.urls')),
+   
 ]
