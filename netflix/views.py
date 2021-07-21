@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required(login_url='login')
+
 def index(request):
   title = 'Netflix clone Homepage'
   url = (settings.API_LINK).format(type = 'movie', search_term = 'popular', api_key = settings.API_KEY)
@@ -25,7 +25,7 @@ def index(request):
 
   return render(request, 'index.html', context)
 
-@login_required(login_url='login')
+
 def search_movies(request):
   
   if 'search_movie' in request.GET and request.GET['search_movie']:
