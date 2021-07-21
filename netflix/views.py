@@ -1,3 +1,4 @@
+from netflix.models import UserProfile
 from django.shortcuts import redirect, render
 from django.conf import settings
 import requests
@@ -85,7 +86,8 @@ def login_user(request):
         return redirect('home')
 
       else:
-        messages(request, 'Username or password is Incorrect')
+        messages.warning(request, 'Username or password is Incorrect')
+        return redirect('login')
   
     context = {
       'title':title
@@ -100,3 +102,21 @@ def logout_user(request):
   logout(request)
   
   return redirect('login')
+
+@login_required(login_url='login')
+def add_user_profile(request):
+  '''
+  View function to add user profile
+  '''
+
+  try:
+    user_profile = UserProfile.objects.get(user = request.user)
+  except UserProfile.DoesNotExist:
+    user_profile = None
+
+  context = {
+    'user_profile':user_profile,
+    'title':f'{request.user.username}\'s Profile'
+  }
+
+  return render(request, 'user_profile.html', context)

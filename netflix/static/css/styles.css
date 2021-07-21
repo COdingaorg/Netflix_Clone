@@ -33,6 +33,9 @@
 .navform{
   margin-top: 20px;
 }
+nav.navbar{
+  width: 100%;
+}
 .footer{
   height: 30vh;
   display: flex;
