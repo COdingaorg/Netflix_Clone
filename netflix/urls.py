@@ -7,4 +7,5 @@ urlpatterns = [
   url(r'^logout/$', views.logout_user, name = 'logout'),
   url(r'^home/$', views.index, name = 'home'),
   url(r'^search_results/$', views.search_movies, name = 'search_movies'),
+  url(r'^movie/(\d+)', views.youtube, name = 'netflix')
   ]

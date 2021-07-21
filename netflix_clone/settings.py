@@ -84,7 +84,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'netflix_clone',
         'USER':config('USER'),
-        'USER_PASSWORD':config('USER_PASSWORD'),
+        'USER_PASSWORD':config('DB_USER_PASSWORD'),
+       
     }
 }
 
