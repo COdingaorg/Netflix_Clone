@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from decouple import config,Csv
 from googleapiclient.discovery import build
 import requests,json
+from .forms import add_profile_form
 
 #API KEYS and Request Parameters
  
@@ -121,7 +122,10 @@ def add_user_profile(request):
   except UserProfile.DoesNotExist:
     user_profile = None
 
+  form = add_profile_form
+
   context = {
+    'form':form,
     'user_profile':user_profile,
     'title':f'{request.user.username}\'s Profile'
   }

@@ -11,4 +11,4 @@ class registerUserForm(UserCreationForm):
 class add_profile_form(forms.ModelForm):
   class Meta:
     model = UserProfile
-    fields = ('__all__')
+    fields = ('photo_path', 'username', 'tagline')
