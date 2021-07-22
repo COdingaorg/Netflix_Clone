@@ -32,7 +32,6 @@
                background-repeat:no-repeat;">
       </div>
       {%else%}
-      <img src="{{user_profile.photo_path.url}}" alt="prorrr">
       <div class="prof_image" style="background-image: url('{{user_profile.photo_path.url}}');
                background-position: center;
                background-size: contain;
@@ -46,7 +45,7 @@
       {% if request.user.id != user_profile.user.id%}
       {%else%}
       <strong>
-        <button type="button" class="btn btn-default m-5" data-toggle="modal" data-target="#exampleModalLong"
+        <button type="button" class="btn btn-default m-2" data-toggle="modal" data-target="#exampleModalLong"
           class="edit_profile">
           Edit Profile
         </button>
@@ -60,9 +59,7 @@
         </button>
       </strong>
       {%endif%}
-      <hr>
-      <div class="redir">
-
+      <div class="redir m-3">
         <a href="/" class="btn btn-warning redirect_btn col-md-8">
           <p class="badge badge-success p-auto">Dashboard</p>
         </a>
@@ -78,16 +75,20 @@
         </a>
 
       </div>
-      <hr>
 
-      <a href="/" class="border border-warning redirect_btn pr-4 pl-4">
-        <p class="p-auto">Logout</p>
+      <a href="{% url 'logout' %}" class="border border-warning redirect_btn p-2">
+        <p>Logout</p>
       </a>
 
 
     </div>
     <div class="col-md-9 right_profile">
       <div class="col-md-12 title_profile">
+        {% for message in messages%}
+        <div class="alert alert-danger">
+          {{message}}
+        </div>
+        {%endfor%}
         <div class="col-md-8">
           <h3>Netflic Account - {{request.user.username}}</h3>
           <i>{% if user_profile %} {{user_profile.tagline}} {%else%} 'No Taglines Added'{%endif%}</i>
@@ -96,6 +97,7 @@
           <a href="#" class="btn btn-warning redirect_btn col-md-8">
             <p class="badge badge-success p-auto">Settings</p>
           </a>
+
           <a href="/"><button class="btn btn-default">Home</button></a>
           
         </div>

@@ -104,8 +104,11 @@ nav.navbar{
   height: 500px;
 }
 .left_profile>.prof_image{
-  height: 50%;
+  margin-top: 10px;
+  height: 200px;
   width: 100%;
+  border: 2px solid rgba(255, 230, 0, .2);
+  background-color: rgba(255, 230, 0, .1);
 }
 .main_page{
   background-color: rgba(128, 128, 128, .6);

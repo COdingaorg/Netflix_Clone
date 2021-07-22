@@ -153,6 +153,8 @@ def add_user_profile(request):
       new_profile = form.save(commit=False)
       new_profile.user = request.user
       new_profile.save()
+
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
       messages.warning(request, 'invalid data added')
 
@@ -179,16 +181,25 @@ def addplaylist(request, movieid):
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
       form = addplaylist_form(request.POST)
-      if form.is_valid():
-        new_play = form.save(commit=False)
-        new_play.date_added = dt.datetime.now()
-        new_play.user_profile = UserProfile.objects.filter(user=request.user).first()
-        new_play.save()
+      try:
+        user_profile = UserProfile.objects.filter(user = request.user).first()
+      except UserProfile.DoesNotExist:
+        user_profile = None
 
-        messages.success(request, 'Movie Added to your playlist')
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+      if user_profile:
+        if form.is_valid():
+          new_play = form.save(commit=False)
+          new_play.date_added = dt.datetime.now()
+          new_play.user_profile = UserProfile.objects.filter(user=request.user).first()
+          new_play.save()
+
+          messages.success(request, 'Movie Added to your playlist')
+          return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+          messages.warning(request, 'No data found')
       else:
-        messages.warning(request, 'No data found')
+        messages.warning(request, 'You need a Profile to add Movie to playlist')
+        return redirect('profile')
 
       
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
