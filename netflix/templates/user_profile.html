@@ -14,6 +14,9 @@
   {%endif%}
   {% block styles %}
   {%bootstrap_css%}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% static 'css/styles.css'%}">
 
   {%endblock%}
@@ -29,6 +32,8 @@
                background-repeat:no-repeat;">
       </div>
       {%else%}
+      <p>{{user_profile.photo_path.url}}</p>
+      <img src="{{user_profile.photo_path.url}}" alt="prorrr">
       <div class="prof_image" style="background-image: url('{{user_profile.photo_path.url}}');
                background-position: center;
                background-size: contain;
@@ -62,7 +67,7 @@
         <a href="/" class="btn btn-warning redirect_btn col-md-8">
           <p class="badge badge-success p-auto">Dashboard</p>
         </a>
-        
+
         <a href="/" class="btn btn-warning redirect_btn col-md-8">
           <p class="badge badge-success p-auto">To Watch</p>
         </a>
@@ -72,11 +77,11 @@
         <a href="/" class="btn btn-warning redirect_btn col-md-8">
           <p class="badge badge-success p-auto">Playlist</p>
         </a>
-        
+
       </div>
       <hr>
 
-      <a href="/" class="border border-warning redirect_btn col-md-8">
+      <a href="/" class="border border-warning redirect_btn pr-4 pl-4">
         <p class="p-auto">Logout</p>
       </a>
 
@@ -97,18 +102,6 @@
         </div>
       </div>
       <div class="col-md-12 main_page">
-        <div class="col-md-11 image_profile">
-
-          <div class="user_sam d-flex flex-row align-items-center justify-content-flex-start">
-
-          </div>
-          <div class="vert_line">
-            <svg id="chart" width="1">
-              <line x1="20" y1="20" x2="20" y2="130"></line>
-            </svg>
-          </div>
-
-        </div>
         <div class="col-md-11 playlist">
 
         </div>
@@ -135,7 +128,12 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="" method="POST" enctype="multipart/form-data">
+        {% for message in messages%}
+        <div class="alert alert-warning">
+          {{message}}
+        </div>
+        {%endfor%}
+        <form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
           {%csrf_token%}
           <div class="modal-body">
             <!--Update profile form-->

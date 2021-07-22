@@ -118,11 +118,19 @@ def add_user_profile(request):
   '''
 
   try:
-    user_profile = UserProfile.objects.get(user = request.user)
+    user_profile = UserProfile.objects.filter(user = request.user).first()
   except UserProfile.DoesNotExist:
     user_profile = None
 
   form = add_profile_form
+  if request.method == 'POST':
+    form = add_profile_form(request.POST, request.FILES)
+    if form.is_valid():
+      new_profile = form.save(commit=False)
+      new_profile.user = request.user
+      new_profile.save()
+    else:
+      messages.warning(request, 'invalid data added')
 
   context = {
     'form':form,
