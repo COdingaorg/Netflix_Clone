@@ -9,8 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
-from pathlib import Path
 import os
 from decouple import config
 
@@ -87,7 +85,7 @@ DATABASES = {
         'NAME': 'netflix_clone',
         'USER':config('DB_USER'),
         'USER_PASSWORD':config('DB_USER_PASSWORD'),
-       
+        
     }
 }
 
@@ -141,8 +139,9 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 # Default primary key field type

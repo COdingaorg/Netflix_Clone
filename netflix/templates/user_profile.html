@@ -32,7 +32,6 @@
                background-repeat:no-repeat;">
       </div>
       {%else%}
-      <p>{{user_profile.photo_path.url}}</p>
       <img src="{{user_profile.photo_path.url}}" alt="prorrr">
       <div class="prof_image" style="background-image: url('{{user_profile.photo_path.url}}');
                background-position: center;
@@ -93,12 +92,12 @@
           <h3>Netflic Account - {{request.user.username}}</h3>
           <i>{% if user_profile %} {{user_profile.tagline}} {%else%} 'No Taglines Added'{%endif%}</i>
         </div>
-        <div class="col-md-3">
-          <a href="">
-            <a href="/" class="btn btn-warning redirect_btn col-md-8">
-              <p class="badge badge-success p-auto">Settings</p>
-            </a>
+        <div class="col-md-3 d-flex flex-row">
+          <a href="#" class="btn btn-warning redirect_btn col-md-8">
+            <p class="badge badge-success p-auto">Settings</p>
           </a>
+          <a href="/"><button class="btn btn-default">Home</button></a>
+          
         </div>
       </div>
       <div class="col-md-12 main_page">

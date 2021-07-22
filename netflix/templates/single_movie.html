@@ -30,7 +30,26 @@
             <i>{{movie.tagline}}</i>
           </span>
 
-          <button class="btn btn-success">Add to playlist</button>
+          <!--Add to playlist form-->
+          <form action="{% url 'addplaylist' movie.id %}" method='POST'>
+            {% for message in messages%}
+      <div class="alert alert-danger">{{message}}</div>
+      {%endfor%}
+            {{form.errors}}
+            {% csrf_token %}
+            <input type="number" name="movie_id" value="{{movie.id}}">
+            <input type="text" name="original_language" value="{{movie.original_language}}">
+            <input type="text" name="original_title" value="{{movie.original_title}}">
+            <input type="text" name="overview" value="{{movie.overview}}">
+            <input type="number" name="popularity" value="{{movie.popularity}}">
+            <input type="text" name="poster_path" value="{{movie.poster_path}}">
+            <input type="text" name="release_date" value="{{movie.release_date}}">
+            <input type="number" name="vote_average" value="{{movie.vote_average}}">
+            <input type="number" name="vote_count" value="{{movie.vote_count}}">
+            <button class="btn btn-success">Add to playlist</button>
+          </form>
+
+          
         </div>
         <div class="col-md-8 card-body bg-white" style="border-radius: 0% 0% 5px 5px;">
           <span style="overflow-y: scroll;">
