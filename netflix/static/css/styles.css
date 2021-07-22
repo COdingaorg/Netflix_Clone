@@ -3,6 +3,7 @@
 * {
 	box-sizing: border-box;
 	font-family: 'Montserrat', sans-serif;
+  border-radius: 8px;
 }
 .banner{
   background-image: url('../images/moviebanner2.jpg');
@@ -61,4 +62,56 @@ nav.navbar{
 }
 .footer>img:nth-child(5):hover{
   background-color: rgb(5,62,255);
+}
+/*styling profile page*/
+.profile{
+  background-color: white;
+  background-image: url('../images/abstract_bg.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position:right;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.title_profile{
+  background-color: white;
+}
+.left_profile{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  height: 500px;
+  border: 2px solid black;
+}
+.left_profile>.prof_image{
+  height: 50%;
+  width: 100%;
+}
+.main_page{
+  background-color: rgba(128, 128, 128, .6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 500px;
+}
+.navbar-brand{
+  border: 2px solid black;
+  margin:20px ;
+}
+.image_profile{
+  background-color: white;
+  height: 400px;
+  padding: 50px;
+  border-radius: 10px;
+}
+.playlist, .recc{
+  height: 200px;
+  margin-bottom: 5px;
+  background-color: white;
+  border-radius: 10px;
 }

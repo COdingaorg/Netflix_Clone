@@ -1,6 +1,135 @@
-{% if user_profile %}
-{{user_profile.tagline}}
-{%else%}
-<p>No profile Added</p>
+{% load static %}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
 
-{%endif%}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% if title %}
+  <title>{{title}}</title>
+  {%else%}
+  <title>Netflic Clone</title>
+  {%endif%}
+  {% block styles %}
+  {%bootstrap_css%}
+  <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+
+  {%endblock%}
+</head>
+
+<body class="d-flex profile">
+  <div class="col-md-11">
+    <div class="col-md-3 left_profile">
+      {% if not user_profile %}
+      <div class="prof_image" style="background-image: url('{% static 'images/human-avatar-profle.png' %}');
+               background-position: center;
+               background-size: contain;
+               background-repeat:no-repeat;">
+      </div>
+      {%else%}
+      <div class="prof_image" style="background-image: url('');
+               background-position: center;
+               background-size: contain;
+               background-repeat:no-repeat;">
+      </div>
+
+      {%endif%}
+
+      <p class="badge badge-light col-md-8">My Dashboard</p>
+      <p class="badge badge-light col-md-8">To watch</p>
+      <p class="badge badge-light col-md-8">Playlist</p>
+      <p class="badge badge-light col-md-8">Support</p>
+      <p class="badge badge-light col-md-8">log out</p>
+
+
+    </div>
+    <div class="col-md-9 right_profile">
+      <div class="col-md-12 title_profile">
+        <div class="col-md-8">
+          <h3>Netflic Account - {{request.user.username}}</h3>
+          <i>{% if user_profile %} {{user_profile.tagline}} {%else%} 'No Taglines Added'{%endif%}</i>
+        </div>
+        <div class="col-md-3">
+          <a href="">
+            <p>Settings</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-12 main_page">
+        <div class="col-md-5 image_profile">
+
+          <div class="user_sam d-flex flex-row align-items-center justify-content-flex-start">
+            <p class="profile_username ml-auto">{{request.user.username}}</p>
+            <!--if it is the owner, edit profile, else, follow-->
+            {%if user_profile %}
+            {% if request.user.id != user_profile.user.id%}
+            <button class="btn btn-default">See Posts</button>
+            {%else%}
+            <strong>
+              <button type="button" class="btn btn-default m-5" data-toggle="modal" data-target="#exampleModalLong"
+                class="edit_profile">
+                Edit Profile
+              </button>
+            </strong>
+            {%endif%}
+            {%else%}
+            <strong>
+              <button type="button" class="btn btn-default m-5" data-toggle="modal" data-target="#exampleModalLong"
+                class="edit_profile">
+                Add Profile
+              </button>
+            </strong>
+            {%endif%}
+          </div>
+
+        </div>
+        <div class="col-md-12 playlist">
+
+        </div>
+        <div class="col-md-12 recc">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Modal Window-->
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title text-center" id="exampleModalLongTitle">Update Profile</h5><img
+        src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile" width="30px" height="30px">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form action="" method="POST" enctype="multipart/form-data">
+      {%csrf_token%}
+      <div class="modal-body">
+        <!--Update profile form-->
+
+        {{form.as_p}}
+
+        <!--end of form -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="close btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline-success">Save changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+<!--End of modal window-->
+
+</body>
+
+</html>
