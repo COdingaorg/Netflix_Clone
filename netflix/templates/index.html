@@ -20,14 +20,17 @@
 
 </div>
 <div class="display_movies">
-  <h3>Popular Movies</h3><hr>
-  <div class="row">
+  <h3>Popular Movies</h3>
+  <hr>
+  <div class="row d-flex justify-content-around">
     {% for result in results%}
 
-    <div class="card col-md-2" style="width: 18rem;">
-      <img class="card-img-top" src="https://www.themoviedb.org/t/p/w220_and_h330_face{{result.poster_path}}"
-        alt="Card image cap">
-      <a href="#" class="btn btn-success">{{result.vote_average|mul:10}}%</a>
+    <div class="card col-md-3 m-3 " style="width: 18rem;">
+      <a href="{% url 'single_movie' result.id %}">
+        <img class="card-img-top" src="https://www.themoviedb.org/t/p/w220_and_h330_face{{result.poster_path}}"
+          alt="Card image cap">
+        <p class="btn btn-success">{{result.vote_average|mul:10}}%</p>
+      </a>
       <div class="card-body">
         <h5 class="card-title"><strong>{{result.original_title}}</strong></h5>
         <p class="card-text">{{result.overview|truncatechars:250}}</p>
@@ -44,9 +47,29 @@
     {% for result in top_rated%}
 
     <div class="card col-md-2" style="width: 18rem;">
-      <img class="card-img-top" src="https://www.themoviedb.org/t/p/w220_and_h330_face{{result.poster_path}}"
-        alt="Card image cap">
-      <a href="#" class="btn btn-success">{{result.vote_average|mul:10}}%</a>
+      <a href="{% url 'single_movie' result.id %}">
+        <img class="card-img-top" src="https://www.themoviedb.org/t/p/w220_and_h330_face{{result.poster_path}}"
+          alt="Card image cap">
+        <p class="btn btn-success">{{result.vote_average|mul:10}}%</p>
+      </a>
+      {% for message in messages%}
+      <div class="alert alert">{{message}}</div>
+      {%endfor%}
+      <form action="{% url 'addplaylist' result.id %}" method='POST'>
+        {{form.errors}}
+        {% csrf_token %}
+        <input type="number" name="movie_id" value="{{result.id}}">
+        <input type="text" name="original_language" value="{{result.original_language}}">
+        <input type="text" name="original_title" value="{{result.original_title}}">
+        <input type="text" name="overview" value="{{result.overview}}">
+        <input type="number" name="popularity" value="{{result.popularity}}">
+        <input type="text" name="poster_path" value="{{result.poster_path}}">
+        <input type="text" name="release_date" value="{{result.release_date}}">
+        <input type="number" name="vote_average" value="{{result.vote_average}}">
+        <input type="number" name="vote_count" value="{{result.vote_count}}">
+
+        <button type="submit" class="btn btn-outline-success">Add To Playlist</button>
+      </form>
       <div class="card-body">
         <h5 class="card-title"><strong>{{result.original_title}}</strong></h5>
         <p class="card-text">{{result.overview|truncatechars:250}}</p>
@@ -57,31 +80,5 @@
     {%endfor%}
   </div>
 </div>
-<footer>
-  <div class="footer bg-dark">
-    <img src="https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbc2075b2cae1a0b59_social_fb_mask.png"
-      width="288"
-      srcset="https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbc2075b2cae1a0b59_social_fb_mask-p-500.png 500w, https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbc2075b2cae1a0b59_social_fb_mask.png 576w"
-      sizes="(max-width: 479px) 20vw, (max-width: 767px) 19vw, (max-width: 991px) 20vw, 16vw" alt="Facebook">
-    <img src="https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbe947c3c406798839_social_twitter_mask.png"
-      width="288"
-      srcset="https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbe947c3c406798839_social_twitter_mask-p-500.png 500w, https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbe947c3c406798839_social_twitter_mask.png 576w"
-      sizes="(max-width: 479px) 20vw, (max-width: 767px) 19vw, (max-width: 991px) 20vw, 16vw" alt="Twitter">
-    <img src="https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbc2075b61771a0b5b_social_Inst_mask.png"
-      width="288"
-      srcset="https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbc2075b61771a0b5b_social_Inst_mask-p-500.png 500w, https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbc2075b61771a0b5b_social_Inst_mask.png 576w"
-      sizes="(max-width: 479px) 20vw, (max-width: 767px) 19vw, (max-width: 991px) 20vw, 16vw" alt="Instagram">
-    <img src="https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbd5d9bd38a4cab8ae_social_dribble_mask.png"
-      width="288"
-      srcset="https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbd5d9bd38a4cab8ae_social_dribble_mask-p-500.png 500w, https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbd5d9bd38a4cab8ae_social_dribble_mask.png 576w"
-      sizes="(max-width: 479px) 20vw, (max-width: 767px) 19vw, (max-width: 991px) 20vw, 16vw" alt="Dribble">
-    <img src="https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbc2075b57f41a0b5a_social_behance_mask.png"
-      width="288"
-      srcset="https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbc2075b57f41a0b5a_social_behance_mask-p-500.png 500w, https://uploads-ssl.webflow.com/5c80e3b3ab24dcac947c0be9/5c9508cbc2075b57f41a0b5a_social_behance_mask.png 576w"
-      sizes="(max-width: 479px) 20vw, (max-width: 767px) 19vw, (max-width: 991px) 20vw, 16vw" alt="Behance">
 
-
-  </div>
-  <p class="text-center">&copy;copyright Caleb Odinga</p>
-</footer>
 {%endblock%}

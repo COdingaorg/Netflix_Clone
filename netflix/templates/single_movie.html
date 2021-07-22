@@ -1,0 +1,60 @@
+{%extends 'base.html'%}
+{% load mathfilters%}
+
+{%block styles%}
+{{block.super}}
+{%endblock%}
+
+{load bootstrap3}
+{%block content%}
+{% if movie %}
+<div class="background" style="background-image: url('https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.poster_path}}'); height: 500px;
+                              background-size: cover;
+                              background-position: center;
+                              background-repeat: no-repeat;
+                              height: auto;">
+  <div class="overlay">
+    <div class="inset">
+      <div class="col-md-4">
+        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.poster_path}}" height="350px" alt="image">
+      </div>
+      <div class="col-md-7">
+        <div class="card col-md-12 d-flex flex-row align-items-center">
+          <span class="card-title p-2">
+            <h1>{{movie.original_title}}</h1>
+            <p class="badge badge-warning">{{movie.original_language}}
+            </p>
+            <i>{{movie.tagline}}</i>
+          </span>
+
+          <button class="btn btn-success">Add to playlist</button>
+        </div>
+        <div class="col-md-8 card-body bg-white" style="border-radius: 0% 0% 5px 5px;">
+          <span style="overflow-y: scroll;">
+            <p>{{movie.overview}}</p>
+          </span>
+          <div class="card-footer">
+            <p class="badge badge-warning">{{movie.popularity}}-pop.</p>
+            <p class="badge p-auto">{{movie.vote_average}}-Avg.</p>
+            <p class="badge p-auto">{{movie.vote_count}}-votes</p>
+            <p class="badge p-auto">{{movie.release_date}}-Date</p>
+            <p class="badge p-auto">{{movie.runtime}}-minutes</p>
+          </div>
+        </div>
+        <div class="col-md-4 bg-light d-flex align-items-center flex-column comp_details" style="border-radius: 0%; overflow-y: scroll; overflow-x: hidden;">
+          <img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.backdrop_path}}" alt="" height="200px">
+          <p style="font-size: .7em; font-weight: bold;">Production Companies</p>
+          <p style="font-size: .8em;"> {{movie.production_companies.1.name}}</p>
+          <p style="font-size: .8em;"> {{movie.production_companies.0.name}}</p>
+        </div>
+      </div>
+      {% else %}
+      <p>No movie returned</p>
+      {%endif%}
+    </div>
+  </div>
+
+</div>
+
+
+{%endblock%}

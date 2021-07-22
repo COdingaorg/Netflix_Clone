@@ -1,3 +1,6 @@
+from logging import exception
+from django.http.response import HttpResponseRedirect
+from netflix.models import Playlist, UserProfile
 from django.shortcuts import redirect, render
 from django.conf import settings
 import requests
@@ -5,9 +8,18 @@ from django.contrib.auth import authenticate, logout, login
 from .forms import registerUserForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from decouple import config,Csv
+from googleapiclient.discovery import build
+import requests,json
+from .forms import add_profile_form, addplaylist_form
+import datetime as dt
+
+#API KEYS and Request Parameters
+ 
+YOUTUBE =  config('YOUTUBE_API_KEY') 
 
 # Create your views here.
-@login_required(login_url='login')
+
 def index(request):
   title = 'Netflix clone Homepage'
   url = (settings.API_LINK).format(type = 'movie', search_term = 'popular', api_key = settings.API_KEY)
@@ -25,7 +37,7 @@ def index(request):
 
   return render(request, 'index.html', context)
 
-@login_required(login_url='login')
+
 def search_movies(request):
   
   if 'search_movie' in request.GET and request.GET['search_movie']:
@@ -85,7 +97,8 @@ def login_user(request):
         return redirect('home')
 
       else:
-        messages(request, 'Username or password is Incorrect')
+        messages.warning(request, 'Username or password is Incorrect')
+        return redirect('login')
   
     context = {
       'title':title
@@ -100,3 +113,127 @@ def logout_user(request):
   logout(request)
   
   return redirect('login')
+
+def single_movie(request, movieid):
+  apiKey = (settings.API_KEY)
+  url = settings.MOVIE_API_LINK
+  singleMovieUrl = url.format(movie_id = movieid, api_key=apiKey)
+                    
+  
+  singleMovie = requests.get(singleMovieUrl).json()
+  try:
+    movie = singleMovie
+  except:
+    movie = None
+  title = f'search movie'
+
+
+  context = {
+    'title':title,
+    'movie':movie,
+  }
+
+  return render(request, 'single_movie.html', context)
+
+@login_required(login_url='login')
+def add_user_profile(request):
+  '''
+  View function to add user profile
+  '''
+
+  try:
+    user_profile = UserProfile.objects.filter(user = request.user).first()
+  except UserProfile.DoesNotExist:
+    user_profile = None
+
+  form = add_profile_form
+  if request.method == 'POST':
+    form = add_profile_form(request.POST, request.FILES)
+    if form.is_valid():
+      new_profile = form.save(commit=False)
+      new_profile.user = request.user
+      new_profile.save()
+    else:
+      messages.warning(request, 'invalid data added')
+
+  context = {
+    'form':form,
+    'user_profile':user_profile,
+    'title':f'{request.user.username}\'s Profile'
+  }
+
+  return render(request, 'user_profile.html', context)
+
+@login_required(login_url='login')
+def addplaylist(request, movieid):
+  form = addplaylist_form
+  if request.method == 'POST':
+    #check if item already exists
+    try:
+      a_movie = Playlist.objects.filter(movie_id = movieid).first()
+    except Playlist.DoesNotExist:
+      a_movie = None
+
+    if a_movie :
+      messages.success(request, 'Movie Already Added in your playlist')
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+      form = addplaylist_form(request.POST)
+      if form.is_valid():
+        new_play = form.save(commit=False)
+        new_play.date_added = dt.datetime.now()
+        new_play.user_profile = UserProfile.objects.filter(user=request.user).first()
+        new_play.save()
+
+        messages.success(request, 'Movie Added to your playlist')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+      else:
+        messages.warning(request, 'No data found')
+
+      
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+# Create your views here.
+# def movies(request):
+#     popular_movies_tmdb = tmdb.Movies('popular')
+#     popular_movies = popular_movies_tmdb.info()['results']
+
+#     upcoming_movies_tmdb = tmdb.Movies('upcoming')
+#     upcoming_movies = upcoming_movies_tmdb.info()['results']
+
+#     # nowshowing_movies_tmdb = tmdb.Movies('nowshowing')
+#     # nowshowing_movies = nowshowing_movies_tmdb.info()['results']
+
+#     return render(request, 'index.html', {'popular':popular_movies, 'upcoming':upcoming_movies})
+
+
+
+# def youtube_movie(request):
+#     # Get movie name and use it to pass it as an argument to the youtube api.
+#     movie_name = movies['original_title']
+#     youtube = build( YOUTUBE)
+#     search_response = youtube.search().list(q=movie_name, part='id,snippet', maxResults=1).execute()
+#     for search_result in search_response.get('items', []):
+#         if search_result['id']['kind'] == 'youtube#video':
+#             video_id = search_result['id']['videoId']
+#         return render(request, 'youtube_movie.html', {'movies':movies, 'videoId':video_id})
+
+def indexpage(request,category):
+    key =  config('API_KEY')  
+    url =  config('url') 
+    url2 = url.format(category,key)
+    urll = requests.get(url2)
+    urlll = urll.json()
+    return urlll
+
+def youtube(request,id):
+    YOUTUBE =  config('YOUTUBE_API_KEY') 
+    popular = indexpage(request,'popular')
+    pp = ''
+    for p in popular['results']:
+        if str(p['id'])==str(id):
+            pp = p['title']
+    youtube = build('youtube','v3',developerKey = YOUTUBE)
+    req = youtube.search().list(q= pp+'trailer',part = 'snippet',type= 'video')
+    res = req.execute()
+    return render(request,'youtube_movie.html',{'response':res})

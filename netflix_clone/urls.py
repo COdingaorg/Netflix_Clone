@@ -22,4 +22,6 @@ urlpatterns = [
     path(r'', include('netflix.urls')),
     path(r'', include('django_registration.backends.activation.urls')),
     path(r'', include('django.contrib.auth.urls')),
+    # url(r'', include('movies.urls')),
+   
 ]
