@@ -1,7 +1,21 @@
+{%extends 'base.html'%}
+{% load mathfilters%}
+
+{%block styles%}
+{{block.super}}
+{%endblock%}
+
+{load bootstrap3}
+{%block content%}
 {% if movie %}
+<div class="background" style="background-image: url('https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.backdrop_path}}'); height: 500px;">
+
+</div>
 {{movie.original_title}}
 <img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.poster_path}}" width="100" alt="image">
   
 {% else %}
 <p>No movie returned</p>
 {%endif%}
+
+{%endblock%}
