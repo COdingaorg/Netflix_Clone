@@ -78,6 +78,9 @@ nav.navbar{
 }
 .title_profile{
   background-color: white;
+  padding: 5px;
+  display: flex;
+  align-items: center;
 }
 .left_profile{
   background-color: white;
@@ -126,6 +129,19 @@ nav.navbar{
   border: 1px solid rgb(255, 230, 0);
   color: black;
 }
+.redir{
+  border: 1px solid rgb(255, 230, 0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5px;
+  background-color: rgba(255, 230, 0, .1);
+}
 .right_profile{
   height: auto;
+}
+svg#chart{
+  background-color: black;
 }
