@@ -20,18 +20,18 @@
       </div>
       <div class="col-md-7">
         <div class="card col-md-12 d-flex flex-row align-items-center">
-          <h1 class="card-title p-2">{{movie.original_title}} <p class="badge badge-warning">{{movie.original_language}}
+          <span class="card-title p-2">
+            <h1>{{movie.original_title}}</h1>
+            <p class="badge badge-warning">{{movie.original_language}}
             </p>
-          </h1>
+            <i>{{movie.tagline}}</i>
+          </span>
 
           <button class="btn btn-success">Add to playlist</button>
-          <span style="height: 100px; border: 1px solid green; overflow-y: scroll;">
-          <i>{{movie.tagline}}</i>
-          </span>
         </div>
-        <div class="col-md-8 card-body bg-white" style="border-radius: 0%;">
+        <div class="col-md-8 card-body bg-white" style="border-radius: 0% 0% 5px 5px;">
           <span style="overflow-y: scroll;">
-          <p>{{movie.overview}}</p>
+            <p>{{movie.overview}}</p>
           </span>
           <div class="card-footer">
             <p class="badge badge-warning">{{movie.popularity}}-pop.</p>
@@ -41,15 +41,7 @@
             <p class="badge p-auto">{{movie.runtime}}-minutes</p>
           </div>
         </div>
-        <div class="col-md-4 bg-light d-flex align-items-center flex-column comp_details" style="border-radius: 0%;">
-          <div class="company d-flex flex-row">
-
-
-          </div>
-          <div class="company d-flex flex-row">
-
-
-          </div>
+        <div class="col-md-4 bg-light d-flex align-items-center flex-column comp_details" style="border-radius: 0%; overflow-y: scroll; overflow-x: hidden;">
           <img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.backdrop_path}}" alt="" height="200px">
           <p style="font-size: .7em; font-weight: bold;">Production Companies</p>
           <p style="font-size: .8em;"> {{movie.production_companies.1.name}}</p>

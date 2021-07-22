@@ -153,12 +153,13 @@ svg#chart{
   background-color: black;
 }
 .overlay{
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   height: 100%;
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 24px;
 
 }
 .inset{
@@ -170,5 +171,5 @@ svg#chart{
   box-shadow: 2px 2px 5px white;
 }
 .comp_details{
-  height: 280px;
+  height: 290px;
 }
