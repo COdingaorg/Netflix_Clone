@@ -1,4 +1,6 @@
-from netflix.models import UserProfile
+from logging import exception
+from django.http.response import HttpResponseRedirect
+from netflix.models import Playlist, UserProfile
 from django.shortcuts import redirect, render
 from django.conf import settings
 import requests
@@ -9,7 +11,8 @@ from django.contrib.auth.decorators import login_required
 from decouple import config,Csv
 from googleapiclient.discovery import build
 import requests,json
-from .forms import add_profile_form
+from .forms import add_profile_form, addplaylist_form
+import datetime as dt
 
 #API KEYS and Request Parameters
  
@@ -139,6 +142,36 @@ def add_user_profile(request):
   }
 
   return render(request, 'user_profile.html', context)
+
+@login_required(login_url='login')
+def addplaylist(request, movieid):
+  form = addplaylist_form
+  if request.method == 'POST':
+    #check if item already exists
+    try:
+      a_movie = Playlist.objects.filter(movie_id = movieid).first()
+    except Playlist.DoesNotExist:
+      a_movie = None
+
+    if a_movie :
+      messages.success(request, 'Movie Already Added in your playlist')
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+      form = addplaylist_form(request.POST)
+      if form.is_valid():
+        new_play = form.save(commit=False)
+        new_play.date_added = dt.datetime.now()
+        new_play.user_profile = UserProfile.objects.filter(user=request.user).first()
+        new_play.save()
+
+        messages.success(request, 'Movie Added to your playlist')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+      else:
+        messages.warning(request, 'No data found')
+
+      
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 # Create your views here.
 # def movies(request):
 #     popular_movies_tmdb = tmdb.Movies('popular')

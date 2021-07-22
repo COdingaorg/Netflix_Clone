@@ -11,4 +11,6 @@ urlpatterns = [
   url(r'^search_results/$', views.search_movies, name = 'search_movies'),
   url(r'user_profile/$', views.add_user_profile, name = 'profile'),
   url(r'^movie/(\d+)', views.youtube, name = 'netflix'),
+  url(r'^addToPlaylist/(\d+)/$', views.addplaylist, name = 'addplaylist')
+
   ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
