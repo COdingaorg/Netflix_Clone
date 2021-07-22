@@ -20,7 +20,8 @@
 
 </div>
 <div class="display_movies">
-  <h3>Popular Movies</h3><hr>
+  <h3>Popular Movies</h3>
+  <hr>
   <div class="row d-flex justify-content-around">
     {% for result in results%}
 
@@ -44,9 +45,11 @@
     {% for result in top_rated%}
 
     <div class="card col-md-2" style="width: 18rem;">
-      <img class="card-img-top" src="https://www.themoviedb.org/t/p/w220_and_h330_face{{result.poster_path}}"
-        alt="Card image cap">
-      <a href="#" class="btn btn-success">{{result.vote_average|mul:10}}%</a>
+      <a href="{% url 'single_movie' result.id %}">
+        <img class="card-img-top" src="https://www.themoviedb.org/t/p/w220_and_h330_face{{result.poster_path}}"
+          alt="Card image cap">
+        <p class="btn btn-success">{{result.vote_average|mul:10}}%</p>
+      </a>
       {% for message in messages%}
       <div class="alert alert">{{message}}</div>
       {%endfor%}

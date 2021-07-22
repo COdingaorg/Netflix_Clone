@@ -127,6 +127,8 @@ USE_TZ = True
 #getting API credentials and link
 API_KEY = config('API_KEY', default = '')
 API_LINK = config('API_LINK', default = '')
+MOVIE_API_LINK = config('MOVIE_API_LINK', default = '')
+SEARCH_MOVIE_API_LINK = config('SEARCH_MOVIE_API_LINK', default = '')
 
 
 # Static files (CSS, JavaScript, Images)

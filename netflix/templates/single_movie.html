@@ -1,0 +1,7 @@
+{% if movie %}
+{{movie.original_title}}
+<img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.poster_path}}" width="100" alt="image">
+  
+{% else %}
+<p>No movie returned</p>
+{%endif%}

@@ -114,6 +114,27 @@ def logout_user(request):
   
   return redirect('login')
 
+def single_movie(request, movieid):
+  apiKey = (settings.API_KEY)
+  url = settings.MOVIE_API_LINK
+  singleMovieUrl = url.format(movie_id = movieid, api_key=apiKey)
+                    
+  
+  singleMovie = requests.get(singleMovieUrl).json()
+  try:
+    movie = singleMovie
+  except:
+    movie = None
+  title = f'search movie'
+
+
+  context = {
+    'title':title,
+    'movie':movie,
+  }
+
+  return render(request, 'single_movie.html', context)
+
 @login_required(login_url='login')
 def add_user_profile(request):
   '''
