@@ -1,4 +1,5 @@
 {%extends 'base.html'%}
+{% load static %}
 {% load mathfilters%}
 
 {%block styles%}
@@ -15,9 +16,11 @@
                               height: auto;">
   <div class="overlay">
     <div class="inset">
-      <div class="col-md-4">
+      <div class="col-md-4 d-flex align-items-center flex-column">
         <img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.poster_path}}" height="350px" alt="image">
+        <a href=""><span class="play_trailer btn btn-default m-2">Play Trailer<img src="{% static 'images/playIcon.jpg' %}" alt="play_trailer" width="20px" height="20px"></span></a>
       </div>
+      
       <div class="col-md-7">
         <div class="card col-md-12 d-flex flex-row align-items-center">
           <span class="card-title p-2">
