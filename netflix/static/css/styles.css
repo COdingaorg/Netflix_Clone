@@ -73,6 +73,7 @@ nav.navbar{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: auto;
 
 }
 .title_profile{
@@ -85,7 +86,6 @@ nav.navbar{
   align-items:center;
   justify-content: center;
   height: 500px;
-  border: 2px solid black;
 }
 .left_profile>.prof_image{
   height: 50%;
@@ -98,15 +98,16 @@ nav.navbar{
   justify-content: space-around;
   align-items: center;
   height: 500px;
+  padding: 20px;
 }
 .navbar-brand{
-  border: 2px solid black;
   margin:20px ;
 }
 .image_profile{
   background-color: white;
   height: 400px;
-  padding: 50px;
+  padding: 20px;
+  margin: 15px;
   border-radius: 10px;
 }
 .playlist, .recc{
@@ -114,4 +115,17 @@ nav.navbar{
   margin-bottom: 5px;
   background-color: white;
   border-radius: 10px;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 10px;
+}
+.redirect_btn{
+  width: auto;
+  height: 30px;
+  margin: 5px;
+  border: 1px solid rgb(255, 230, 0);
+  color: black;
+}
+.right_profile{
+  height: auto;
 }

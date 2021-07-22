@@ -37,12 +37,11 @@
 
       {%endif%}
 
-      <p class="badge badge-light col-md-8">My Dashboard</p>
-      <p class="badge badge-light col-md-8">To watch</p>
-      <p class="badge badge-light col-md-8">Playlist</p>
-      <p class="badge badge-light col-md-8">Support</p>
-      <p class="badge badge-light col-md-8">log out</p>
-
+      <a href="/" class="btn btn-warning redirect_btn col-md-8"><p class="badge badge-success p-auto">Dashboard</p></a>
+      <a href="/" class="btn btn-warning redirect_btn col-md-8"><p class="badge badge-success p-auto">To Watch</p></a>
+      <a href="/" class="btn btn-warning redirect_btn col-md-8"><p class="badge badge-success p-auto">Playlist</p></a>
+      <a href="/" class="btn btn-warning redirect_btn col-md-8"><p class="badge badge-success p-auto">Home</p></a>
+      <a href="/" class="border border-warning redirect_btn col-md-8"><p class="p-auto">Logout</p></a>
 
     </div>
     <div class="col-md-9 right_profile">
@@ -58,14 +57,13 @@
         </div>
       </div>
       <div class="col-md-12 main_page">
-        <div class="col-md-5 image_profile">
+        <div class="col-md-11 image_profile">
 
           <div class="user_sam d-flex flex-row align-items-center justify-content-flex-start">
             <p class="profile_username ml-auto">{{request.user.username}}</p>
             <!--if it is the owner, edit profile, else, follow-->
             {%if user_profile %}
             {% if request.user.id != user_profile.user.id%}
-            <button class="btn btn-default">See Posts</button>
             {%else%}
             <strong>
               <button type="button" class="btn btn-default m-5" data-toggle="modal" data-target="#exampleModalLong"
@@ -85,10 +83,10 @@
           </div>
 
         </div>
-        <div class="col-md-12 playlist">
+        <div class="col-md-11 playlist">
 
         </div>
-        <div class="col-md-12 recc">
+        <div class="col-md-11 recc">
         </div>
       </div>
 
@@ -116,8 +114,6 @@ aria-hidden="true">
       <div class="modal-body">
         <!--Update profile form-->
 
-        {{form.as_p}}
-
         <!--end of form -->
       </div>
       <div class="modal-footer">
@@ -129,6 +125,13 @@ aria-hidden="true">
 </div>
 </div>
 <!--End of modal window-->
+
+{%block scripts%}
+{%bootstrap_javascript%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+{%endblock%}
 
 </body>
 
