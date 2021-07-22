@@ -37,15 +37,15 @@
       {%endfor%}
             {{form.errors}}
             {% csrf_token %}
-            <input type="number" name="movie_id" value="{{movie.id}}">
-            <input type="text" name="original_language" value="{{movie.original_language}}">
-            <input type="text" name="original_title" value="{{movie.original_title}}">
-            <input type="text" name="overview" value="{{movie.overview}}">
-            <input type="number" name="popularity" value="{{movie.popularity}}">
-            <input type="text" name="poster_path" value="{{movie.poster_path}}">
-            <input type="text" name="release_date" value="{{movie.release_date}}">
-            <input type="number" name="vote_average" value="{{movie.vote_average}}">
-            <input type="number" name="vote_count" value="{{movie.vote_count}}">
+            <input class="hidden" type="number" name="movie_id" value="{{movie.id}}">
+            <input class="hidden" type="text" name="original_language" value="{{movie.original_language}}">
+            <input class="hidden" type="text" name="original_title" value="{{movie.original_title}}">
+            <input class="hidden" type="text" name="overview" value="{{movie.overview}}">
+            <input class="hidden" type="number" name="popularity" value="{{movie.popularity}}">
+            <input class="hidden" type="text" name="poster_path" value="{{movie.poster_path}}">
+            <input class="hidden" type="text" name="release_date" value="{{movie.release_date}}">
+            <input class="hidden" type="number" name="vote_average" value="{{movie.vote_average}}">
+            <input class="hidden" type="number" name="vote_count" value="{{movie.vote_count}}">
             <button class="btn btn-success">Add to playlist</button>
           </form>
 
