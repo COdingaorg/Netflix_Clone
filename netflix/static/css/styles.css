@@ -45,23 +45,36 @@ nav.navbar{
   justify-content: center;
 }
 .footer>img{
-  width: 100px;
+  width: 50px;
   margin:0;
+  margin: 20px;
+  border: 2px solid white;
+  background-color: white;
 }
 .footer>img:first-child:hover{
-  background-color: blue;
+  border: 2px solid rgb(0, 0, 255);
+  background-color: rgb(0, 0, 255);
+  box-shadow: 3px 3px 3px 3px rgb(0, 0, 255);
 }
 .footer>img:nth-child(2):hover{
+  border: 2px solid rgb(29,156,234);
   background-color: rgb(29,156,234);
+  box-shadow: 3px 3px 3px 3px rgb(29,156,234);
 }
 .footer>img:nth-child(3):hover{
+  border: 2px solid rgb(188,93,179);
   background-color: rgb(188,93,179);
+  box-shadow: 3px 3px 3px 3px rgb(188,93,179);
 }
 .footer>img:nth-child(4):hover{
+  border: 2px solid rgb(234,76,137);
   background-color: rgb(234,76,137);
+  box-shadow: 3px 3px 3px 3px rgb(234,76,137);
 }
 .footer>img:nth-child(5):hover{
+  border: 2px solid rgb(5,62,255);
   background-color: rgb(5,62,255);
+  box-shadow: 3px 3px 3px 3px rgb(5,62,255);
 }
 /*styling profile page*/
 .profile{
@@ -138,4 +151,24 @@ nav.navbar{
 }
 svg#chart{
   background-color: black;
+}
+.overlay{
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.inset{
+  background-color: rgba(255, 255, 255, .7);
+  width: 80%;
+  height: 80%;
+  border: 2px solid white;
+  padding: 20px;
+  box-shadow: 2px 2px 5px white;
+}
+.comp_details{
+  height: 280px;
 }

@@ -8,14 +8,61 @@
 {load bootstrap3}
 {%block content%}
 {% if movie %}
-<div class="background" style="background-image: url('https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.backdrop_path}}'); height: 500px;">
+<div class="background" style="background-image: url('https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.poster_path}}'); height: 500px;
+                              background-size: cover;
+                              background-position: center;
+                              background-repeat: no-repeat;
+                              height: auto;">
+  <div class="overlay">
+    <div class="inset">
+      <div class="col-md-4">
+        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.poster_path}}" height="350px" alt="image">
+      </div>
+      <div class="col-md-7">
+        <div class="card col-md-12 d-flex flex-row align-items-center">
+          <h1 class="card-title p-2">{{movie.original_title}} <p class="badge badge-warning">{{movie.original_language}}
+            </p>
+          </h1>
+
+          <button class="btn btn-success">Add to playlist</button>
+          <span style="height: 100px; border: 1px solid green; overflow-y: scroll;">
+          <i>{{movie.tagline}}</i>
+          </span>
+        </div>
+        <div class="col-md-8 card-body bg-white" style="border-radius: 0%;">
+          <span style="overflow-y: scroll;">
+          <p>{{movie.overview}}</p>
+          </span>
+          <div class="card-footer">
+            <p class="badge badge-warning">{{movie.popularity}}-pop.</p>
+            <p class="badge p-auto">{{movie.vote_average}}-Avg.</p>
+            <p class="badge p-auto">{{movie.vote_count}}-votes</p>
+            <p class="badge p-auto">{{movie.release_date}}-Date</p>
+            <p class="badge p-auto">{{movie.runtime}}-minutes</p>
+          </div>
+        </div>
+        <div class="col-md-4 bg-light d-flex align-items-center flex-column comp_details" style="border-radius: 0%;">
+          <div class="company d-flex flex-row">
+
+
+          </div>
+          <div class="company d-flex flex-row">
+
+
+          </div>
+          <img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.backdrop_path}}" alt="" height="200px">
+          <p style="font-size: .7em; font-weight: bold;">Production Companies</p>
+          <p style="font-size: .8em;"> {{movie.production_companies.1.name}}</p>
+          <p style="font-size: .8em;"> {{movie.production_companies.0.name}}</p>
+        </div>
+      </div>
+      {% else %}
+      <p>No movie returned</p>
+      {%endif%}
+    </div>
+  </div>
 
 </div>
-{{movie.original_title}}
-<img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.poster_path}}" width="100" alt="image">
-  
-{% else %}
-<p>No movie returned</p>
-{%endif%}
+
 
 {%endblock%}
