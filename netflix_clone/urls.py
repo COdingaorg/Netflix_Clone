@@ -18,8 +18,10 @@ from django.urls import path
 from django.urls.conf import include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('netflix.urls')),
-    path('', include('django_registration.backends.activation.urls')),
-    path('', include('django.contrib.auth.urls')),
+    path(r'admin/', admin.site.urls),
+    path(r'', include('netflix.urls')),
+    path(r'', include('django_registration.backends.activation.urls')),
+    path(r'', include('django.contrib.auth.urls')),
+    # url(r'', include('movies.urls')),
+   
 ]

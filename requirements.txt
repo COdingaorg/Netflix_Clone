@@ -1,0 +1,6 @@
+Django==3.2.5
+django-bootstrap3==15.0.0
+django-mathfilters==1.0.0
+django-registration==3.1.1
+psycopg2==2.9.1
+python-decouple==3.4

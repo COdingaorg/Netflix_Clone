@@ -8,4 +8,5 @@ urlpatterns = [
   url(r'^home/$', views.index, name = 'home'),
   url(r'^search_results/$', views.search_movies, name = 'search_movies'),
   url(r'user_profile/$', views.add_user_profile, name = 'profile'),
+  url(r'^movie/(\d+)', views.youtube, name = 'netflix'),
   ]
