@@ -55,21 +55,7 @@
       {% for message in messages%}
       <div class="alert alert">{{message}}</div>
       {%endfor%}
-      <form action="{% url 'addplaylist' result.id %}" method='POST'>
-        {{form.errors}}
-        {% csrf_token %}
-        <input type="number" name="movie_id" value="{{result.id}}">
-        <input type="text" name="original_language" value="{{result.original_language}}">
-        <input type="text" name="original_title" value="{{result.original_title}}">
-        <input type="text" name="overview" value="{{result.overview}}">
-        <input type="number" name="popularity" value="{{result.popularity}}">
-        <input type="text" name="poster_path" value="{{result.poster_path}}">
-        <input type="text" name="release_date" value="{{result.release_date}}">
-        <input type="number" name="vote_average" value="{{result.vote_average}}">
-        <input type="number" name="vote_count" value="{{result.vote_count}}">
-
-        <button type="submit" class="btn btn-outline-success">Add To Playlist</button>
-      </form>
+      
       <div class="card-body">
         <h5 class="card-title"><strong>{{result.original_title}}</strong></h5>
         <p class="card-text">{{result.overview|truncatechars:250}}</p>

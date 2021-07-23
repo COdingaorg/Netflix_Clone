@@ -22,7 +22,7 @@
   {%endblock%}
 </head>
 
-<body class="d-flex profile">
+<body class="d-flex flex-column profile">
   <div class="col-md-11">
     <div class="col-md-3 left_profile">
       {% if not user_profile %}
@@ -32,8 +32,6 @@
                background-repeat:no-repeat;">
       </div>
       {%else%}
-      <p>{{user_profile.photo_path.url}}</p>
-      <img src="{{user_profile.photo_path.url}}" alt="prorrr">
       <div class="prof_image" style="background-image: url('{{user_profile.photo_path.url}}');
                background-position: center;
                background-size: contain;
@@ -47,7 +45,7 @@
       {% if request.user.id != user_profile.user.id%}
       {%else%}
       <strong>
-        <button type="button" class="btn btn-default m-5" data-toggle="modal" data-target="#exampleModalLong"
+        <button type="button" class="btn btn-default m-2" data-toggle="modal" data-target="#exampleModalLong"
           class="edit_profile">
           Edit Profile
         </button>
@@ -61,9 +59,7 @@
         </button>
       </strong>
       {%endif%}
-      <hr>
-      <div class="redir">
-
+      <div class="redir m-3">
         <a href="/" class="btn btn-warning redirect_btn col-md-8">
           <p class="badge badge-success p-auto">Dashboard</p>
         </a>
@@ -79,37 +75,89 @@
         </a>
 
       </div>
-      <hr>
 
-      <a href="/" class="border border-warning redirect_btn pr-4 pl-4">
-        <p class="p-auto">Logout</p>
+      <a href="{% url 'logout' %}" class="border border-warning redirect_btn p-2">
+        <p>Logout</p>
       </a>
 
 
     </div>
     <div class="col-md-9 right_profile">
       <div class="col-md-12 title_profile">
+        {% for message in messages%}
+        <div class="alert alert-danger">
+          {{message}}
+        </div>
+        {%endfor%}
         <div class="col-md-8">
           <h3>Netflic Account - {{request.user.username}}</h3>
           <i>{% if user_profile %} {{user_profile.tagline}} {%else%} 'No Taglines Added'{%endif%}</i>
         </div>
-        <div class="col-md-3">
-          <a href="">
-            <a href="/" class="btn btn-warning redirect_btn col-md-8">
-              <p class="badge badge-success p-auto">Settings</p>
-            </a>
+        <div class="col-md-3 d-flex flex-row">
+          <a href="#" class="btn btn-warning redirect_btn col-md-8">
+            <p class="badge badge-success p-auto">Settings</p>
           </a>
+
+          <a href="/"><button class="btn btn-default">Home</button></a>
+
         </div>
       </div>
       <div class="col-md-12 main_page">
-        <div class="col-md-11 playlist">
+        <div class="col-md-12 playlist">
 
-        </div>
-        <div class="col-md-11 recc">
+          {% if user_profile%}
+          {% if playlist_items%}
+          {% for movie in playlist_items %}
+
+
+          <div class="card col-md-3">
+            <a href="{% url 'single_movie' movie.movie_id %}">
+            <div class="card-image" style="background-image: url('https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.poster_path}}');
+                                      height: 200px;
+                                      background-size: contain;
+                                      background-position: center;
+                                      background-repeat: no-repeat;
+                                      ">
+            </div>
+
+            <div class="card-footer">
+              <p class="text-center bold">{{movie.original_title}}</p>
+              <h6>Added {{movie.date_added|timesince}} ago</h6>
+              <button class="btn btn-danger remove-btn">Remove</button>
+            </div>
+          </div>
+          </a>
+
+
+          {%endfor%}
+          {%else%}
+          <p class="text-center">No Movies in PlayList</p>
+          {%endif%}
+          {%else%}
+          <p class="text-center">Add Your Profile to Proceed</p>
+
+          {%endif%}
+
         </div>
       </div>
 
     </div>
+  </div>
+  <div class="col-md-12 recc">
+    {% if user_profile%}
+    {% if recc_items%}
+    {% for movie in recc_items %}
+
+    {{movie.original_title}}
+
+    {%endfor%}
+    {%else%}
+    <p class="text-center">No Movies in Recommendation</p>
+    {%endif%}
+    {%else%}
+    <p class="text-center">Add Your Profile to Proceed</p>
+
+    {%endif%}
   </div>
 
   <!--Modal Window-->

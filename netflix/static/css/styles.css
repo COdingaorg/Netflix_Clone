@@ -5,6 +5,9 @@
 	font-family: 'Montserrat', sans-serif;
   border-radius: 8px;
 }
+.bold{
+  font-weight: bold;
+}
 .banner{
   background-image: url('../images/moviebanner2.jpg');
   background-position: center;
@@ -36,6 +39,9 @@
 }
 nav.navbar{
   width: 100%;
+}
+.navbar-nav>li{
+  margin: 10px;
 }
 .footer{
   height: 30vh;
@@ -104,17 +110,17 @@ nav.navbar{
   height: 500px;
 }
 .left_profile>.prof_image{
-  height: 50%;
+  margin-top: 10px;
+  height: 200px;
   width: 100%;
+  border: 2px solid rgba(255, 230, 0, .2);
+  background-color: rgba(255, 230, 0, .1);
 }
 .main_page{
   background-color: rgba(128, 128, 128, .6);
   display: flex;
   flex-direction: column;
   padding: 20px;
-}
-.navbar-brand{
-  margin:20px ;
 }
 .image_profile{
   background-color: white;
@@ -123,14 +129,28 @@ nav.navbar{
   margin: 15px;
   border-radius: 10px;
 }
-.playlist, .recc{
-  height: 200px;
-  margin-bottom: 5px;
+.recc{
   background-color: white;
   border-radius: 10px;
-  padding: 20px;
-  margin: 15px;
-  border-radius: 10px;
+  overflow-x: scroll;
+}
+.playlist{
+  border: 2px solid white;
+  height: 600px;
+  overflow-y: scroll;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+}
+.card-image{
+  border-radius: 0%;
+}
+.playlist>.card{
+  margin: 3px;
 }
 .redirect_btn{
   width: auto;
@@ -172,4 +192,9 @@ svg#chart{
 }
 .comp_details{
   height: 290px;
+}
+.remove-btn{
+  width:40px;
+  font-size: .6em;
+  padding: 1px;
 }
