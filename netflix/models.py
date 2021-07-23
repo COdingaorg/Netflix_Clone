@@ -23,6 +23,5 @@ class Playlist(models.Model):
   release_date = models.CharField(max_length=200)
   vote_average = models.FloatField()
   vote_count = models.IntegerField(default=0)
-
   date_added = models.DateTimeField()
   user_profile = models.ForeignKey(UserProfile, on_delete=CASCADE)

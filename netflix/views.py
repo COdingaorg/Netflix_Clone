@@ -146,6 +146,12 @@ def add_user_profile(request):
   except UserProfile.DoesNotExist:
     user_profile = None
 
+  #getting playlist
+  try:
+    play_list = Playlist.objects.filter(user_profile = user_profile)
+  except Playlist.DoesNotExist:
+    play_list = None
+
   form = add_profile_form
   if request.method == 'POST':
     form = add_profile_form(request.POST, request.FILES)
@@ -159,6 +165,7 @@ def add_user_profile(request):
       messages.warning(request, 'invalid data added')
 
   context = {
+    'playlist_items':play_list,
     'form':form,
     'user_profile':user_profile,
     'title':f'{request.user.username}\'s Profile'

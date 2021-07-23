@@ -5,6 +5,9 @@
 	font-family: 'Montserrat', sans-serif;
   border-radius: 8px;
 }
+.bold{
+  font-weight: bold;
+}
 .banner{
   background-image: url('../images/moviebanner2.jpg');
   background-position: center;
@@ -134,6 +137,7 @@ nav.navbar{
   padding: 20px;
   margin: 15px;
   border-radius: 10px;
+  overflow-x: scroll;
 }
 .redirect_btn{
   width: auto;
