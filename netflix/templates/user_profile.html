@@ -22,7 +22,7 @@
   {%endblock%}
 </head>
 
-<body class="d-flex profile">
+<body class="d-flex flex-column profile">
   <div class="col-md-11">
     <div class="col-md-3 left_profile">
       {% if not user_profile %}
@@ -103,14 +103,15 @@
         </div>
       </div>
       <div class="col-md-12 main_page">
-        <div class="col-md-11 playlist d-flex flex-row align-items-center">
+        <div class="col-md-12 playlist">
 
           {% if user_profile%}
           {% if playlist_items%}
           {% for movie in playlist_items %}
 
 
-          <div class="card col-md-4">
+          <div class="card col-md-3">
+            <a href="{% url 'single_movie' movie.movie_id %}">
             <div class="card-image" style="background-image: url('https://www.themoviedb.org/t/p/w220_and_h330_face{{movie.poster_path}}');
                                       height: 200px;
                                       background-size: contain;
@@ -118,7 +119,7 @@
                                       background-repeat: no-repeat;
                                       ">
             </div>
-            <a href="{% url 'single_movie' movie.movie_id %}"></a>
+
             <div class="card-footer">
               <p class="text-center bold">{{movie.original_title}}</p>
               <h6>Added {{movie.date_added|timesince}} ago</h6>
@@ -138,25 +139,25 @@
           {%endif%}
 
         </div>
-        <div class="col-md-11 recc">
-          {% if user_profile%}
-          {% if recc_items%}
-          {% for movie in recc_items %}
-
-          {{movie.original_title}}
-
-          {%endfor%}
-          {%else%}
-          <p class="text-center">No Movies in Recommendation</p>
-          {%endif%}
-          {%else%}
-          <p class="text-center">Add Your Profile to Proceed</p>
-
-          {%endif%}
-        </div>
       </div>
 
     </div>
+  </div>
+  <div class="col-md-12 recc">
+    {% if user_profile%}
+    {% if recc_items%}
+    {% for movie in recc_items %}
+
+    {{movie.original_title}}
+
+    {%endfor%}
+    {%else%}
+    <p class="text-center">No Movies in Recommendation</p>
+    {%endif%}
+    {%else%}
+    <p class="text-center">Add Your Profile to Proceed</p>
+
+    {%endif%}
   </div>
 
   <!--Modal Window-->
